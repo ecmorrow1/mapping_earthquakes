@@ -3,8 +3,31 @@ console.log("working");
 let cityData = cities;
 
 // Create the map object with a center and zoom level.
-let map = L.map('mapid').setView([40.7, -94.5], 5);
+// let map = L.map('mapid').setView([40.7, -94.5], 5);
 // let map = L.map('mapid').setView([34.0522, -118.2437], 14);
+// let map = L.map('mapid').setView([36.1733, -120.1794], 7);
+let map = L.map('mapid').setView([37.6213, -122.3790], 5);
+
+// let line = [
+//   [33.9416, -118.4085], //LAX
+//   [37.6213, -122.3790]  //SFO
+// ];
+
+let line = [
+  [33.9416, -118.4085], //LAX
+  [37.6213, -122.3790], //SFO
+  [40.7899, -111.9791], //SLC
+  [47.4502, -122.3088]  //SEA
+];
+
+//Plotting a line between the two points defined above
+// L.polyline(line, {
+//   color: "red"
+// }).addTo(map);
+L.polyline(line, {
+  color: "yellow"
+}).addTo(map);
+
 
 // Create the map object with a center and zoom level.
 // This method is useful when we need to add multiple tile laters, or a background image of
@@ -68,11 +91,20 @@ let map = L.map('mapid').setView([40.7, -94.5], 5);
  });
 
 // We create the tile layer that will be the background of our map.
-// let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-// attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
-//     maxZoom: 18,
-//     accessToken: API_KEY_MapBox
-// });
+let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    accessToken: API_KEY_MapBox
+});
+
+var satellite = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+  attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+  tileSize: 512,
+  maxZoom: 18,
+  zoomOffset: -1,
+  id: "mapbox/satellite-streets-v11",
+  accessToken: API_KEY_MapBox
+});
 
 var dark = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
   attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
@@ -85,4 +117,5 @@ var dark = L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?
 
 // Then we add our 'graymap' tile layer to the map.
 // streets.addTo(map);
-dark.addTo(map);
+satellite.addTo(map);
+// dark.addTo(map);

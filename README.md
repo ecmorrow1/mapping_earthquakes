@@ -1,1 +1,3 @@
 # mapping_earthquakes
+
+This project makes use of leaflet and GeoJSON to map the most recent earthquakes in a rolling 7-day period throughout the world.  The primary layer includes earthquake locations with the size of the location indicator and the color being representative of the magnitude of the earthquake.  The second layer provides visualization of where the tectonic plates are located.  The third layer provides only visualization of major earthquakes.
